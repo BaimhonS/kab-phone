@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:9
+    container_name: kab-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kab-phone
+      MYSQL_USER: guess
+      MYSQL_PASSWORD: guess
+    ports:
+      - "3306:3306"
+  db-client:
+    image: phpmyadmin 
+    container_name: kab-db-client
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_ARBITRARY=1
+  redis:
+    image: redis:7.2-alpine
+    container_name: kab-redis
+    restart: always
+    ports:
+      - "6379:6379"
+  # server:
+  #   build:
+  #     context: ../...
+  #     dockerfile: ../backend/.
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - db
