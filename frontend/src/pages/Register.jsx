@@ -117,24 +117,24 @@ const Register = () => {
                 <div className="space-y-4">
                   <div>
                     <Label htmlFor="username">Username <span className="text-red-500">*</span></Label>
-                    <Input id="username" name="username" value={formData.username} onChange={handleChange} placeholder="eg.guessuser" required />
+                    <Input id="username" name="username" value={formData.username} onChange={handleChange} placeholder="eg. Guessuser" required />
                   </div>
                   <div>
                     <Label htmlFor="first_name">First Name <span className="text-red-500">*</span></Label>
-                    <Input id="first_name" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="John" required />
+                    <Input id="first_name" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="eg. John" required />
                   </div>
                   <div>
                     <Label htmlFor="last_name">Last Name <span className="text-red-500">*</span></Label>
-                    <Input id="last_name" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Doe" required />
+                    <Input id="last_name" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="eg. Doe" required />
                   </div>
                   <div>
                     <Label htmlFor="password">Password <span className="text-red-500">*</span></Label>
-                    <Input id="password" name="password" type="password" value={formData.password} onChange={handleChange} placeholder="eg.j_Za1234" required />
+                    <Input id="password" name="password" type="password" value={formData.password} onChange={handleChange} placeholder="eg. LnwZa007." required />
                     {passwordFormatError && <p className="text-red-500 text-sm">{passwordFormatError}</p>}
                   </div>
                   <div>
                     <Label htmlFor="confirm_password">Confirm Password <span className="text-red-500">*</span></Label>
-                    <Input id="confirm_password" name="confirm_password" type="password" value={formData.confirm_password} onChange={handleChange} placeholder="eg.j_Za1234" required />
+                    <Input id="confirm_password" name="confirm_password" type="password" value={formData.confirm_password} onChange={handleChange} placeholder="eg. LnwZa007" required />
                     {passwordMatchError && <p className="text-red-500 text-sm">{passwordMatchError}</p>}
                   </div>
                 </div>
@@ -146,7 +146,7 @@ const Register = () => {
                 <div className="space-y-4">
                   <div>
                     <Label htmlFor="phone_number">Phone Number <span className="text-red-500">*</span></Label>
-                    <Input id="phone_number" name="phone_number" value={formData.phone_number} onChange={handleChange} placeholder="09XXXXXXXX" required />
+                    <Input id="phone_number" name="phone_number" value={formData.phone_number} onChange={handleChange} placeholder="eg. 09XXXXXXXX" required />
                     {phoneNumberError && <p className="text-red-500 text-sm">{phoneNumberError}</p>}
                   </div>
                   <div>
@@ -155,12 +155,12 @@ const Register = () => {
                   </div>
                   <div>
                     <Label htmlFor="address">Address <span className="text-red-500">*</span></Label>
-                    <Input id="address" name="address" value={formData.address} onChange={handleChange} placeholder="ChiangMai MaeRim RimTai" required />
+                    <Input id="address" name="address" value={formData.address} onChange={handleChange} placeholder="eg. Wong Sawang, Bangsue, Bangkok, 10800" required />
                     {addressError && <p className="text-red-500 text-sm">{addressError}</p>}
                   </div>
                   <div>
                     <Label htmlFor="age">Age <span className="text-red-500">*</span></Label>
-                    <Input id="age" name="age" type="number" value={formData.age} onChange={handleChange} placeholder="12" required />
+                    <Input id="age" name="age" type="number" value={formData.age} onChange={handleChange} placeholder="eg. 99" required />
                   </div>
                   <div>
                     <Label htmlFor="birth_date">Birth Date <span className="text-red-500">*</span></Label>
