@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
@@ -8,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
+import axios from 'axios';
 
 const AddEditProduct = () => {
   const { id } = useParams();
@@ -23,7 +23,6 @@ const AddEditProduct = () => {
     image: null
   });
 
-  // สำหรับการแสดงตัวอย่างรูปภาพ
   const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
@@ -31,7 +30,6 @@ const AddEditProduct = () => {
       const { brand_name, model_name, os, price, amount, image } = location.state.product;
       setFormData({ brand_name, model_name, os, price: price.toString(), amount: amount.toString(), image: null });
 
-      // แสดงรูปภาพที่มีอยู่แล้วถ้าเป็นหน้าแก้ไข
       if (image) {
         setImagePreview(`data:image/jpeg;base64,${image}`);
       }
@@ -78,7 +76,6 @@ const AddEditProduct = () => {
       const file = files[0];
       setFormData({ ...formData, [name]: file });
       
-      // สร้าง URL สำหรับแสดงตัวอย่างรูปภาพ
       const imageUrl = URL.createObjectURL(file);
       setImagePreview(imageUrl);
     } else {
@@ -90,13 +87,6 @@ const AddEditProduct = () => {
     e.preventDefault();
     mutation.mutate(formData);
   };
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user || user.role !== 'admin') {
-      navigate('/');
-    }
-  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -134,7 +124,6 @@ const AddEditProduct = () => {
                 <Input id="image" name="image" type="file" onChange={handleInputChange} />
               </div>
 
-              {/* แสดงตัวอย่างรูปภาพถ้ามี */}
               {imagePreview && (
                 <div>
                   <img src={imagePreview} alt="Preview" className="max-w-xs max-h-xs object-cover mt-4" />

@@ -1,2 +1,2 @@
 INSERT INTO users (username , password , first_name , last_name , phone_number, role , created_at , updated_at , deleted_at) VALUES
-('admin' , '4dm1n' , 'admin' , 'kab-phone' , '0999999999' , 'admin' , NOW() , NOW() , NULL);
+                    ('admin' , '4dm1n' , 'admin' , 'kab-phone' , '0999999999' , 'admin' , NOW() , NOW() , NULL);

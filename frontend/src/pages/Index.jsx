@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import ErrorMessage from '@/components/ErrorMessage';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 const fetchPhones = async (page, search) => {
   const response = await axios.get(`http://localhost:8080/api/phones?page=${page}&page_size=8${search ? `&search=${search}` : ''}`);

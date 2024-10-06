@@ -26,7 +26,9 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:8080/api/users/login', formData);
       const { access_token } = response.data;
-  
+      
+      const payload = JSON.parse(atob(access_token.split('.')[1]));
+      localStorage.setItem('user', JSON.stringify(payload));
       // const config = {
       //   headers: {
       //     'Authorization': `Bearer ${access_token}`
