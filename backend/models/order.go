@@ -8,7 +8,7 @@ import (
 
 type Order struct {
 	ID             uint           `gorm:"primaryKey;autoIncrement;not null" json:"id"`
-	TrackingNumber string         `gorm:"tracking_number;unique;not null" json:"tracking_number"`
+	TrackingNumber string         `gorm:"tracking_number;not null" json:"tracking_number"`
 	CartID         uint           `json:"cart_id"`
 	Cart           Cart           `json:"cart"`
 	TotalPrice     float32        `json:"total_price"`
