@@ -34,10 +34,10 @@ const Login = () => {
       }
   
       // Decode base64url to base64
-      const base64Url = tokenParts[1]
+      let base64Url = tokenParts[1]
         .replace(/-/g, '+')  // Replace '-' with '+'
         .replace(/_/g, '/'); // Replace '_' with '/'
-      
+  
       // Add padding if necessary
       const padding = base64Url.length % 4;
       if (padding) {
