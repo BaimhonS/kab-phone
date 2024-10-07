@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/BaimhonS/kab-phone/configs"
@@ -23,6 +22,7 @@ type OrderService interface {
 	GetBestAndWorstSellingPhones(c *fiber.Ctx) error
 	GetTotalIncome(c *fiber.Ctx) error
 	GetAllOrders(c *fiber.Ctx) error
+	AddTrackingNumber(c *fiber.Ctx) error
 }
 
 func NewOrderService(configClients configs.ConfigClients) OrderService {
@@ -76,7 +76,7 @@ func (s *OrderServiceImpl) ConfirmOrder(c *fiber.Ctx) error {
 
 	var order models.Order
 	order.CartID = cart.ID
-	order.TrackingNumber = fmt.Sprintf("TH-%s", utils.GenerateNumericString(10))
+	// order.TrackingNumber = fmt.Sprintf("TH-%s", utils.GenerateNumericString(10))
 	order.TotalPrice = totalPrice
 
 	if err := tx.Save(&order).Error; err != nil {
@@ -108,7 +108,6 @@ func (s *OrderServiceImpl) ConfirmOrder(c *fiber.Ctx) error {
 
 func (s *OrderServiceImpl) GetAllOrders(c *fiber.Ctx) error {
 	var orders []models.Order
-	// Fetch all orders, including related data such as Cart, Items, and Phones
 	if err := s.DB.Preload("Cart").Preload("Cart.Items").Preload("Cart.Items.Phone").Preload("Cart.User").Find(&orders).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(utils.ErrorResponse{
 			Message: "failed to fetch all orders",
@@ -116,10 +115,52 @@ func (s *OrderServiceImpl) GetAllOrders(c *fiber.Ctx) error {
 		})
 	}
 
-	// Return success response with all the orders
 	return c.Status(fiber.StatusOK).JSON(utils.SuccessResponse{
 		Message: "get all orders success",
 		Data:    orders,
+	})
+}
+
+func (s *OrderServiceImpl) AddTrackingNumber(c *fiber.Ctx) error {
+	var request struct {
+		OrderID        uint   `json:"order_id"`
+		TrackingNumber string `json:"tracking_number"`
+	}
+
+	if err := c.BodyParser(&request); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(utils.ErrorResponse{
+			Message: "invalid request body",
+			Error:   err,
+		})
+	}
+
+	// Find the order by ID
+	var order models.Order
+	if err := s.DB.Model(&models.Order{}).Where("id = ?", request.OrderID).First(&order).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return c.Status(fiber.StatusNotFound).JSON(utils.ErrorResponse{
+				Message: "order not found",
+				Error:   err,
+			})
+		}
+		return c.Status(fiber.StatusInternalServerError).JSON(utils.ErrorResponse{
+			Message: "database error",
+			Error:   err,
+		})
+	}
+
+	order.TrackingNumber = request.TrackingNumber
+
+	if err := s.DB.Save(&order).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(utils.ErrorResponse{
+			Message: "update tracking number failed",
+			Error:   err,
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(utils.SuccessResponse{
+		Message: "tracking number added successfully",
+		Data:    order,
 	})
 }
 
