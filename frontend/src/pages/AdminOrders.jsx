@@ -104,7 +104,7 @@ const AdminOrders = () => {
                     <TableHead className="px-4 py-3 text-left">Total Price</TableHead>
                     <TableHead className="px-4 py-3 text-left">Items</TableHead>
                     <TableHead className="px-4 py-3 text-left">User Address</TableHead>
-                    <TableHead className="px-4 py-3 text-left">Delivered</TableHead>
+                    {/* <TableHead className="px-4 py-3 text-left">Delivered</TableHead> */}
                     <TableHead className="px-4 py-3 text-left">Add Tracking</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -125,21 +125,21 @@ const AdminOrders = () => {
                         ))}
                       </TableCell>
                       <TableCell className="px-4 py-3">{order.cart.user.address}</TableCell>
-                      <TableCell className="px-4 py-3">
+                      {/* <TableCell className="px-4 py-3">
                         <Checkbox
                           checked={order.isDelivered}
                           onCheckedChange={(checked) =>
                             updateStatusMutation.mutate({ orderId: order.id, isDelivered: checked })
                           }
                         />
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell className="px-4 py-3">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-3">
                           <Input
                             placeholder="Tracking Number"
                             value={trackingNumbers[order.id] || ''}
                             onChange={(e) => handleTrackingNumberChange(order.id, e.target.value)}
-                            className="w-32"
+                            className="w-33"
                           />
                           <Button onClick={() => handleAddTrackingNumber(order.id)} size="sm">
                             Add
