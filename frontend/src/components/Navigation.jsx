@@ -20,11 +20,18 @@ const Navigation = () => {
           </Link>
         </li>
         {isAdmin && (
+          <>
           <li>
             <Link to="/show-income" className={`${location.pathname === '/show-income' ? 'text-blue-600' : 'text-gray-600'}`}>
               Show Income
             </Link>
           </li>
+          <li>
+            <Link to="/check-order" className={`${location.pathname === '/check-order' ? 'text-blue-600' : 'text-gray-600'}`}>
+              Check Order
+            </Link>
+          </li>
+          </>
         )}
         <li>
           <Link to="/worst-best-selling" className={`${location.pathname === '/worst-best-selling' ? 'text-blue-600' : 'text-gray-600'}`}>

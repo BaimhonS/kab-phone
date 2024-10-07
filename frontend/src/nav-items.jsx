@@ -8,6 +8,7 @@ import Cart from "./pages/Cart.jsx";
 import TrackOrder from "./pages/TrackOrder.jsx";
 import Profile from "./pages/Profile.jsx";
 import AddEditProduct from "./pages/AddEditProduct.jsx";
+import AdminOrders from "./pages/AdminOrders.jsx";
 
 export const navItems = [
   {
@@ -68,6 +69,13 @@ export const navItems = [
     to: "/add-product",
     icon: <Package className="h-4 w-4" />,
     page: <AddEditProduct />,
+    requiresAdmin: true,
+  },
+  {
+    title: "Check Order",
+    to: "/check-order",
+    icon: <Package className="h-4 w-4" />,
+    page: <AdminOrders />,
     requiresAdmin: true,
   },
 ];

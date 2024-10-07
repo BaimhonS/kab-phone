@@ -22,6 +22,7 @@ type OrderService interface {
 	GetTrackingNumbers(c *fiber.Ctx) error
 	GetBestAndWorstSellingPhones(c *fiber.Ctx) error
 	GetTotalIncome(c *fiber.Ctx) error
+	GetAllOrders(c *fiber.Ctx) error
 }
 
 func NewOrderService(configClients configs.ConfigClients) OrderService {
@@ -102,6 +103,23 @@ func (s *OrderServiceImpl) ConfirmOrder(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(utils.SuccessResponse{
 		Message: "confirm order success",
 		Data:    nil,
+	})
+}
+
+func (s *OrderServiceImpl) GetAllOrders(c *fiber.Ctx) error {
+	var orders []models.Order
+	// Fetch all orders, including related data such as Cart, Items, and Phones
+	if err := s.DB.Preload("Cart").Preload("Cart.Items").Preload("Cart.Items.Phone").Preload("Cart.User").Find(&orders).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(utils.ErrorResponse{
+			Message: "failed to fetch all orders",
+			Error:   err,
+		})
+	}
+
+	// Return success response with all the orders
+	return c.Status(fiber.StatusOK).JSON(utils.SuccessResponse{
+		Message: "get all orders success",
+		Data:    orders,
 	})
 }
 

@@ -17,4 +17,5 @@ func OrderController(app fiber.Router, configClients configs.ConfigClients) {
 	orderController.Get("/track-orders", orderService.GetTrackingNumbers)
 	orderController.Get("/best-worst-phones", orderService.GetBestAndWorstSellingPhones)
 	orderController.Get("/total-income", userValidate.ValidateRoleAdmin, orderService.GetTotalIncome)
+	orderController.Get("/check-order", userValidate.ValidateRoleAdmin, orderService.GetAllOrders)
 }
