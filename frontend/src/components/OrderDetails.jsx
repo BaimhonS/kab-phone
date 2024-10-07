@@ -9,7 +9,7 @@ const OrderDetails = ({ order }) => (
     <CardContent>
       <p><strong>Tracking Number:</strong> {order.tracking_number}</p>
       <p><strong>Order Status:</strong> {order.cart.status}</p>
-      <p><strong>Total Price:</strong> ${order.total_price}</p>
+      <p><strong>Total Price:</strong> ฿{order.total_price.toLocaleString()}</p>
       <p><strong>Order Date:</strong> {new Date(order.created_at).toLocaleString()}</p>
       <h3 className="font-semibold mt-4 mb-2">Items:</h3>
       <ul>

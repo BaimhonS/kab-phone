@@ -76,7 +76,7 @@ func (s *OrderServiceImpl) ConfirmOrder(c *fiber.Ctx) error {
 
 	var order models.Order
 	order.CartID = cart.ID
-	// order.TrackingNumber = fmt.Sprintf("TH-%s", utils.GenerateNumericString(10))
+	order.TrackingNumber = "wait for tracking number"
 	order.TotalPrice = totalPrice
 
 	if err := tx.Save(&order).Error; err != nil {
@@ -134,7 +134,6 @@ func (s *OrderServiceImpl) AddTrackingNumber(c *fiber.Ctx) error {
 		})
 	}
 
-	// Find the order by ID
 	var order models.Order
 	if err := s.DB.Model(&models.Order{}).Where("id = ?", request.OrderID).First(&order).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
