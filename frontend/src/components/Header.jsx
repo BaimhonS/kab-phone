@@ -59,7 +59,7 @@ const Header = ({ cartItemCount }) => {
     <div className="bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex-grow flex items-center justify-center">
-          <img src="/logo.png" alt="Logo" className="h-12 w-12" />
+          <img src="/logo.png" alt="Logo" className="h-16 w-16" />
         </div>
         <div className="flex items-center space-x-2">
           <Button variant="ghost" size="icon" onClick={handleCartClick} className="relative">

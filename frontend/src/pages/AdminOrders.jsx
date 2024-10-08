@@ -89,7 +89,7 @@ const AdminOrders = () => {
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <Header />
       <Navigation />
-      <main className="container mx-auto px-4 py-8 flex-grow">
+      <main className="container mx-auto px-2 py-8 flex-grow">
         <h1 className="text-3xl font-bold mb-6">Admin Orders</h1>
         <Card className="overflow-hidden">
           <CardContent className="p-0">
@@ -97,26 +97,26 @@ const AdminOrders = () => {
               <Table className="w-full whitespace-nowrap">
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="px-4 py-3 text-left">Order ID</TableHead>
-                    <TableHead className="px-4 py-3 text-left">First Name</TableHead>
-                    <TableHead className="px-4 py-3 text-left">Last Name</TableHead>
-                    <TableHead className="px-4 py-3 text-left">Tracking Number</TableHead>
-                    <TableHead className="px-4 py-3 text-left">Total Price</TableHead>
-                    <TableHead className="px-4 py-3 text-left">Items</TableHead>
-                    <TableHead className="px-4 py-3 text-left">User Address</TableHead>
-                    {/* <TableHead className="px-4 py-3 text-left">Delivered</TableHead> */}
-                    <TableHead className="px-4 py-3 text-left">Add Tracking</TableHead>
+                    <TableHead className="px-3 py-3 text-left">Order ID</TableHead>
+                    <TableHead className="px-3 py-3 text-left">First Name</TableHead>
+                    <TableHead className="px-3 py-3 text-left">Last Name</TableHead>
+                    <TableHead className="px-3 py-3 text-left">Tracking Number</TableHead>
+                    <TableHead className="px-3 py-3 text-left">Total Price</TableHead>
+                    <TableHead className="px-3 py-3 text-left">Items</TableHead>
+                    <TableHead className="px-3 py-3 text-left">User Address</TableHead>
+                    <TableHead className="px-3 py-3 text-left">Tel. Number</TableHead>
+                    <TableHead className="px-3 py-3 text-left">Add Tracking</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {data.data.map((order) => (
                     <TableRow key={order.id}>
-                      <TableCell className="px-4 py-3">{order.id}</TableCell>
-                      <TableCell className="px-4 py-3">{order.cart.user.first_name}</TableCell>
-                      <TableCell className="px-4 py-3">{order.cart.user.last_name}</TableCell>
-                      <TableCell className="px-4 py-3">{order.tracking_number || 'N/A'}</TableCell>
-                      <TableCell className="px-4 py-3">฿{order.total_price.toLocaleString()}</TableCell>
-                      <TableCell className="px-4 py-3">
+                      <TableCell className="px-3 py-3">{order.id}</TableCell>
+                      <TableCell className="px-3 py-3">{order.cart.user.first_name}</TableCell>
+                      <TableCell className="px-3 py-3">{order.cart.user.last_name}</TableCell>
+                      <TableCell className="px-3 py-3">{order.tracking_number || 'N/A'}</TableCell>
+                      <TableCell className="px-3 py-3">฿{order.total_price.toLocaleString()}</TableCell>
+                      <TableCell className="px-3 py-3">
                         {order.cart.items.map((item, index) => (
                           <div key={item.id}>
                             {item.amount}x {item.phone.brand_name} {item.phone.model_name}
@@ -124,7 +124,8 @@ const AdminOrders = () => {
                           </div>
                         ))}
                       </TableCell>
-                      <TableCell className="px-4 py-3">{order.cart.user.address}</TableCell>
+                      <TableCell className="px-3 py-3">{order.cart.user.address}</TableCell>
+                      <TableCell className="px-3 py-3">{order.cart.user.phone_number}</TableCell>
                       {/* <TableCell className="px-4 py-3">
                         <Checkbox
                           checked={order.isDelivered}
@@ -133,7 +134,7 @@ const AdminOrders = () => {
                           }
                         />
                       </TableCell> */}
-                      <TableCell className="px-4 py-3">
+                      <TableCell className="px-3 py-3">
                         <div className="flex items-center space-x-3">
                           <Input
                             placeholder="Tracking Number"
